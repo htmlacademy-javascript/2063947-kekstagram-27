@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм»
 
 * Студент: [Инна Романец](https://up.htmlacademy.ru/javascript/27/user/2063947).
-* Наставник: `Неизвестно`.
+* Наставник: [Руслан Бреев](https://htmlacademy.ru/profile/blckwltz).
 
 ---
 
