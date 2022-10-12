@@ -52,10 +52,9 @@ const message = [
   'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
   'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
-]; //случайное число (1, 5), строка
+]; //строка, сообщения случайные
 
 const description = 'Фотография для Кекстаграм. Собственность Кекса. Все права защищены';
-
 const COMMENTS_NAME = ['Alex', 'Barbara', 'Mike', 'Dilan', 'Lisa']; //строка, имена случайные
 
 //2. Функция для определения случайного целого числа из указанного диапазона
@@ -84,7 +83,7 @@ const createMessages = () =>
 //5. Функция для создания комментария
 
 const createComments = (index) => ({
-  id: index,
+  id: index + 1,
   avatar: 'img/avatar-${getRandomPositiveInteger(0, AVATARS_COUNT)}.svg',
   message: createMessages(),
   COMMENTS_NAME: getRandomArrayElement(COMMENTS_NAME)
@@ -92,19 +91,19 @@ const createComments = (index) => ({
 
 //6. Функция для создания объекта с описанием фотографии
 const createDescription = (index) => ({
-  id: index, //когда здесь "index + 1", то id начинается с 0, а не с 1
+  id: index + 1,
   url: 'photos/${index + 1}.jpg',
   description: description,
   likes: getRandomPositiveInteger(15, 200),
   comments: Array.from(
     {length: getRandomPositiveInteger(0, COMMENTS_COUNT)},
-    (_, index) => createComments(index + 1)
+    (_, index) => createComments(index)
     )
 });
 
 //7. Создание 25-ти массивов и вывод в консоль
 const photoDescriptions = () =>
   Array.from({length: PICTURES_COUNT}, (_, index) =>
-  createDescription(index + 1));
+  createDescription(index));
 
 photoDescriptions();
