@@ -27,7 +27,7 @@ const createMessages = () =>
 
 const createComments = (index) => ({
   id: index + 1,
-  avatar: 'img/avatar-${getRandomPositiveInteger(0, AVATARS_COUNT)}.svg',
+  avatar: `img/avatar-${getRandomPositiveInteger(0, AVATARS_COUNT)}.svg`,
   message: createMessages(),
   COMMENTS_NAME: getRandomArrayElement(COMMENTS_NAME)
 });
@@ -35,7 +35,7 @@ const createComments = (index) => ({
 //Функция для создания объекта с описанием фотографии
 const createDescription = (index) => ({
   id: index + 1,
-  url: 'photos/${index + 1}.jpg',
+  url: `photos/${index + 1}.jpg`,
   description: description,
   likes: getRandomPositiveInteger(15, 200),
   comments: Array.from(
