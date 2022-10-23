@@ -6,4 +6,4 @@ createPhotoDescriptions();
 
 import './newphotos.js';
 import {createUserPhotos} from './newphotos.js';
-console.log(createUserPhotos());
+//console.log(createUserPhotos());
