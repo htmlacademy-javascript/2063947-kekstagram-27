@@ -1,6 +1,9 @@
 const fullPhotoContainer = document.querySelector('.big-picture');
 const commentsList = document.querySelector('.social__comments');
 
+const fullPhoto = document.querySelector('.big-picture__preview');
+const closeFullPfotoButton = fullPhoto.querySelector('.big-picture__cancel');
+
 const newCommentTemplate = document.querySelector('#picture_comment')
   .content
   .querySelector('.social__comment');
@@ -29,5 +32,17 @@ const openFullPhoto = function(url, likes, comments, description) {
   loading.classList.add('hidden');
   document.body.classList.add('modal-open');
 };
+
+closeFullPfotoButton.addEventListener('click', () => {
+  fullPhotoContainer.classList.add('hidden');
+  //document.body.classList.remove('modal-open');
+});
+
+document.addEventListener('keydown', (evt) => {
+  if (evt.key === 'Escape') {
+    fullPhotoContainer.classList.add('hidden');
+    //document.body.classList.remove('modal-open');
+  }
+});
 
 export {openFullPhoto};

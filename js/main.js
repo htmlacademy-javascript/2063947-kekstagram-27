@@ -5,5 +5,4 @@
 //import './newphotos.js';
 import {createUserPhotos} from './newphotos.js';
 createUserPhotos();
-
-//import './fullphotos.js';
+//console.log(createUserPhotos());
