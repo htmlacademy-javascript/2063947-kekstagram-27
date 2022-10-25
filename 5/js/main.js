@@ -1,9 +1,8 @@
-import './data.js';
-import {createPhotoDescriptions} from './data.js';
+//import './data.js';
+//import {createPhotoDescriptions} from './data.js';
+//createPhotoDescriptions();
 
-createPhotoDescriptions();
-//console.log(createPhotoDescriptions(25));
-
-import './newphotos.js';
+//import './newphotos.js';
 import {createUserPhotos} from './newphotos.js';
+createUserPhotos();
 //console.log(createUserPhotos());

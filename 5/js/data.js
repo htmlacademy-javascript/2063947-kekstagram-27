@@ -29,7 +29,7 @@ const createComments = (commentsIndex) => ({
   id: commentsIndex + 1,
   avatar: `img/avatar-${getRandomPositiveInteger(0, AVATARS_COUNT)}.svg`,
   message: createMessages(),
-  COMMENTS_NAME: getRandomArrayElement(COMMENTS_NAME)
+  commentsName: getRandomArrayElement(COMMENTS_NAME)
 });
 
 //Функция для создания объекта с описанием фотографии
@@ -50,9 +50,6 @@ const createPhotoDescriptions = (count) =>
     createDescription(index));
 
 export {createPhotoDescriptions};
-
-/*const userPhotos = document.querySelector('.img-upload__overlay');
-userPhotos.classList.remove('hidden');*/
 
 /*const photoTemplate = document.querySelector('#picture').content;
 const newphotoTemplate = photoTemplate.querySelector('.picture');*/
