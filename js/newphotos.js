@@ -1,4 +1,5 @@
 import {createPhotoDescriptions} from './data.js';
+import {openFullPhoto} from './fullphotos.js';
 
 //находим шаблон
 const newphotoTemplate = document.querySelector('#picture')
@@ -12,11 +13,16 @@ const similarPhotosFragment = document.createDocumentFragment();
 
 const createUserPhotos = () => {
 
-  similarPhotos.forEach(({url, likes, description}) => {
+  similarPhotos.forEach(({url, likes, description, comments}) => {
     const photoElement = newphotoTemplate.cloneNode(true); //клонируем шаблон
     photoElement.querySelector('.picture__img').src = url;
     photoElement.querySelector('.picture__likes').textContent = likes;
-    photoElement.querySelector('.picture__comments').textContent = description;
+    photoElement.querySelector('.picture__comments').textContent = comments.length;
+
+    photoElement.addEventListener('click', () => {
+      openFullPhoto(url, likes, comments, description);
+    });
+
     similarPhotosFragment.append(photoElement);
   });
 
