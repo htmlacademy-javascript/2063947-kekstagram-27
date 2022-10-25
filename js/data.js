@@ -1,7 +1,7 @@
 import {getRandomArrayElement} from './util.js';
 import {getRandomPositiveInteger} from './util.js';
 
-const PICTURES_COUNT = 25; //необходимо создать 25 описаний фотографий
+/*const PICTURES_COUNT = 25; //необходимо создать 25 описаний фотографий*/
 const AVATARS_COUNT = 6; //всего есть 6 вариантов аватарок
 const COMMENTS_COUNT = 10; //количество комментариев определяется самостоятельно
 
@@ -25,28 +25,31 @@ const createMessages = () =>
 
 //Функция для создания комментария
 
-const createComments = (index) => ({
-  id: index + 1,
+const createComments = (commentsIndex) => ({
+  id: commentsIndex + 1,
   avatar: `img/avatar-${getRandomPositiveInteger(0, AVATARS_COUNT)}.svg`,
   message: createMessages(),
-  COMMENTS_NAME: getRandomArrayElement(COMMENTS_NAME)
+  commentsName: getRandomArrayElement(COMMENTS_NAME)
 });
 
 //Функция для создания объекта с описанием фотографии
-const createDescription = (index) => ({
-  id: index + 1,
-  url: `photos/${index + 1}.jpg`,
+const createDescription = (descriptionIndex) => ({
+  id: descriptionIndex + 1,
+  url: `photos/${descriptionIndex + 1}.jpg`,
   description: description,
   likes: getRandomPositiveInteger(15, 200),
   comments: Array.from(
     {length: getRandomPositiveInteger(0, COMMENTS_COUNT)},
-    (_, index) => createComments(index)
+    (_, commentsIndex) => createComments(commentsIndex)
   )
 });
 
 //Создание 25-ти массивов и вывод в консоль
-const createPhotoDescriptions = () =>
-  Array.from({length: PICTURES_COUNT}, (_, index) =>
+const createPhotoDescriptions = (count) =>
+  Array.from({length: count}, (_, index) =>
     createDescription(index));
 
 export {createPhotoDescriptions};
+
+/*const photoTemplate = document.querySelector('#picture').content;
+const newphotoTemplate = photoTemplate.querySelector('.picture');*/
