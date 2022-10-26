@@ -1,3 +1,5 @@
+import {isEscapeKey} from './util.js';
+
 const fullPhotoContainer = document.querySelector('.big-picture');
 const commentsList = document.querySelector('.social__comments');
 
@@ -17,6 +19,12 @@ const createFullPhotoComments = function(avatar, message, commentsName) {
   commentsList.appendChild(commentElement);
 };
 
+const onFullPhotoEscKeydown = (evt) => {
+  if (isEscapeKey(evt)) {
+    closeFullPfoto();
+  }};
+
+//открытие полноэкранного изображения
 const openFullPhoto = function(url, likes, comments, description) {
   fullPhotoContainer.classList.remove('hidden');
   fullPhotoContainer.querySelector('.big-picture__img').src = url;
@@ -31,18 +39,19 @@ const openFullPhoto = function(url, likes, comments, description) {
   counter.classList.add('hidden');
   loading.classList.add('hidden');
   document.body.classList.add('modal-open');
+  document.addEventListener('keydown', onFullPhotoEscKeydown);
 };
 
+//закрытие окна при нажатии на Esc
+function closeFullPfoto () {
+  fullPhotoContainer.classList.add('hidden');
+  document.removeEventListener('keydown', onFullPhotoEscKeydown);
+}
+
+//закрытие окна при нажатии на крестик
 closeFullPfotoButton.addEventListener('click', () => {
   fullPhotoContainer.classList.add('hidden');
   document.body.classList.remove('modal-open');
-});
-
-document.addEventListener('keydown', (evt) => {
-  if (evt.key === 'Escape') {
-    fullPhotoContainer.classList.add('hidden');
-    document.body.classList.remove('modal-open');
-  }
 });
 
 export {openFullPhoto};
