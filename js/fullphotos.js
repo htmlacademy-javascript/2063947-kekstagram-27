@@ -35,13 +35,13 @@ const openFullPhoto = function(url, likes, comments, description) {
 
 closeFullPfotoButton.addEventListener('click', () => {
   fullPhotoContainer.classList.add('hidden');
-  //document.body.classList.remove('modal-open');
+  document.body.classList.remove('modal-open');
 });
 
 document.addEventListener('keydown', (evt) => {
   if (evt.key === 'Escape') {
     fullPhotoContainer.classList.add('hidden');
-    //document.body.classList.remove('modal-open');
+    document.body.classList.remove('modal-open');
   }
 });
 
