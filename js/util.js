@@ -14,9 +14,7 @@ const getRandomArrayElement = (array) =>
   array[getRandomPositiveInteger(0, array.length - 1)];
 
 //Функция для обработчика по нажатию Esc
-const isEscapeKey = (evt) => {
-  return evt.key === 'Escape';
-};
+const isEscapeKey = (evt) => evt.key === 'Escape';
 
 /*//Функция для проверки максимальной длины строки
 function checkLengthShort(str, maxLegth) {

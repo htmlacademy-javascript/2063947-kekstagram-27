@@ -45,13 +45,11 @@ const openFullPhoto = function(url, likes, comments, description) {
 //закрытие окна при нажатии на Esc
 function closeFullPfoto () {
   fullPhotoContainer.classList.add('hidden');
+  document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onFullPhotoEscKeydown);
 }
 
 //закрытие окна при нажатии на крестик
-closeFullPfotoButton.addEventListener('click', () => {
-  fullPhotoContainer.classList.add('hidden');
-  document.body.classList.remove('modal-open');
-});
+closeFullPfotoButton.addEventListener('click', closeFullPfoto);
 
 export {openFullPhoto};
