@@ -55,9 +55,10 @@ const pristine = new Pristine(loadingForm, {
 });
 
 //1 - проверка с помощью регулярного выражения (начинается с #, состоит из букв и чисел, не может состоять только из #, макс. длина 20 символов, нечувствительны к регистру)
-const smth = /^#[a-zа-яё0-9]{1,19}$/i;
+const regexp = /^#[a-zа-яё0-9]{1,19}$/i;
 const checkRegExp = () => {
-  smth.test(textHashtags.value);
+  const differenceSymbols = regexp.test(textHashtags.value);
+  return differenceSymbols;
 };
 
 pristine.addValidator(textHashtags, checkRegExp, 'Допускаются буквы и цифры. Максимальная длина 20 символов, включая символ #. Хэш-тег должен начинаться с символа #');
