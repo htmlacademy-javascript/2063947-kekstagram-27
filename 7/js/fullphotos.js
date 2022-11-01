@@ -54,24 +54,41 @@ closeFullPfotoButton.addEventListener('click', closeFullPfoto);
 
 //ЗАГРУЗКА ДОПОЛНИТЕЛЬНЫХ КОММЕНТАРИЕВ
 
+//функция для загрузки комментариев по 5 штук
+const comment = document.querySelector('.social__comment');
+const loadMoreButton = document.querySelector('.comments-loader');
+
+window.onload = function () {
+  for (let i = 5; i <= comment.length; i++) {
+    comment[i].style.display = "none";
+  }
+
+  let countID = 5;
+  loadMoreButton.addEventListener('click', () => {
+    countID += 5;
+    if (countID <= comment.length) {
+      for (let i = 0; i < countID; i++) {
+        comment[i].style.display = "block";
+      }
+    }
+  });
+};
+
 /*
 Код по загрузке комментариев по 5 штук нужно дописать внутри функции openFullPhoto
 
 Код для формирования комментариев уже есть - функция createFullPhotoComments
 
 Отображение дополнительных комментариев происходит при нажатии на кнопку .comments-loader:
-- это отдельная функция?
 - находим кнопку
 - добавляем обработчик события по клику
-- при нажатии на кнопку отображается не более 5 новых комментариев ??? Код самостоятельно найти?
+- при нажатии на кнопку отображается не более 5 новых комментариев
 
 ***если больше 5 -- из количества нарисовать первые 5 и т.д. array.slice()
 
 При изменении количества показанных комментариев число показанных комментариев в блоке .social__comment-count также изменяется.
-- какая-то проверка и формула должны быть
 
 Если все комментарии показаны, кнопку .comments-loader следует скрыть, добавив класс hidden:
-- здесь должен быть цикл и какая-то проверка?
 */
 
 export {openFullPhoto};
