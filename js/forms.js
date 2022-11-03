@@ -22,15 +22,15 @@ const onLoadFormEscKeydown = (evt) => {
 };
 
 //открытие формы загрузки изображения
-const openLoadForm = (evt) => {
-  evt.preventDefault();
+const openLoadForm = () => {
+  //evt.preventDefault();
   photoLoadingForm.classList.remove('hidden');
   document.body.classList.add('modal-open');
   document.addEventListener('keydown', onLoadFormEscKeydown);
 };
 
 // обработчик события по нажатию на форму загрузки
-photoLoadingButton.addEventListener('click', openLoadForm);
+photoLoadingButton.addEventListener('change', openLoadForm);
 
 //обработчик события закрытия формы по нажатию на Esc
 function closeLoadForm () {
@@ -109,14 +109,3 @@ loadingForm.addEventListener('submit', (evt) => {
     console.log('Форма невалидна');
   }
 });
-
-//если фокус находится в поле ввода, нажатие на Esc не должно приводить к закрытию формы редактирования изображения
-// const isInputFocused = () =>
-//   document.activeElement === hashTagInput || document.activeElement === commentsInput;
-
-//   function onLoadFormEscKeydown(evt) {
-//     if (evt.key === 'Escape' && !isInputFocused()) {
-//       evt.preventDefault();
-//       closeLoadForm();
-//     }
-//   };
