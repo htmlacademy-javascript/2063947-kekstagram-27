@@ -696,6 +696,10 @@ main {
   border-radius: 5px;
 }
 
+.text--error {
+  color:#e90000;
+}
+
 .text__description {
   width: 450px;
   height: 100px;
