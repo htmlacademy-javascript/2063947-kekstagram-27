@@ -24,6 +24,8 @@ const onFullPhotoEscKeydown = (evt) => {
     closeFullPfoto();
   }};
 
+let countID = 5;
+
 //открытие полноэкранного изображения
 const openFullPhoto = function(url, likes, comments, description) {
   fullPhotoContainer.classList.remove('hidden');
@@ -40,6 +42,33 @@ const openFullPhoto = function(url, likes, comments, description) {
   loading.classList.add('hidden');
   document.body.classList.add('modal-open');
   document.addEventListener('keydown', onFullPhotoEscKeydown);
+
+  //загрузка комментариев по 5 штук
+  const allComments = document.querySelectorAll('.social__comment');
+  const allCommentsArray = Array.from(allComments);
+  const allCommentsArrayLength = allCommentsArray.length;
+
+  //const loading = document.querySelector('.comments-loader');
+
+  if (allCommentsArrayLength > 5) {
+    commentsList.slice(0, 5);
+    counter.classList.remove('hidden');
+    loading.classList.remove('hidden');
+
+    loading.addEventListener('click', (evt) => {
+      evt.preventDefault();
+
+      for (let i = 0; i < countID; i++) {
+        countID += 5;
+        commentsList.slice(5, 10);
+        commentsList.forEach.style.display = "block";
+      }
+    });
+
+  }
+  //Не забудьте реализовать обновление числа показанных комментариев в блоке .social__comment-count
+  //Если все комментарии показаны, кнопку .comments-loader следует скрыть, добавив класс hidden
+  //загрузка комментариев по 5 штук
 };
 
 //закрытие окна при нажатии на Esc
@@ -51,44 +80,5 @@ function closeFullPfoto () {
 
 //закрытие окна при нажатии на крестик
 closeFullPfotoButton.addEventListener('click', closeFullPfoto);
-
-//ЗАГРУЗКА ДОПОЛНИТЕЛЬНЫХ КОММЕНТАРИЕВ
-
-//функция для загрузки комментариев по 5 штук
-const comment = document.querySelector('.social__comment');
-const loadMoreButton = document.querySelector('.comments-loader');
-
-window.onload = function () {
-  for (let i = 5; i <= comment.length; i++) {
-    comment[i].style.display = "none";
-  }
-
-  let countID = 5;
-  loadMoreButton.addEventListener('click', () => {
-    countID += 5;
-    if (countID <= comment.length) {
-      for (let i = 0; i < countID; i++) {
-        comment[i].style.display = "block";
-      }
-    }
-  });
-};
-
-/*
-Код по загрузке комментариев по 5 штук нужно дописать внутри функции openFullPhoto
-
-Код для формирования комментариев уже есть - функция createFullPhotoComments
-
-Отображение дополнительных комментариев происходит при нажатии на кнопку .comments-loader:
-- находим кнопку
-- добавляем обработчик события по клику
-- при нажатии на кнопку отображается не более 5 новых комментариев
-
-***если больше 5 -- из количества нарисовать первые 5 и т.д. array.slice()
-
-При изменении количества показанных комментариев число показанных комментариев в блоке .social__comment-count также изменяется.
-
-Если все комментарии показаны, кнопку .comments-loader следует скрыть, добавив класс hidden:
-*/
 
 export {openFullPhoto};
