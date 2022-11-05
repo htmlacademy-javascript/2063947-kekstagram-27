@@ -44,14 +44,9 @@ const openFullPhoto = function(url, likes, comments, description) {
   document.addEventListener('keydown', onFullPhotoEscKeydown);
 
   //загрузка комментариев по 5 штук
-  const allComments = document.querySelectorAll('.social__comment');
-  const allCommentsArray = Array.from(allComments);
-  const allCommentsArrayLength = allCommentsArray.length;
 
-  //const loading = document.querySelector('.comments-loader');
-
-  if (allCommentsArrayLength > 5) {
-    commentsList.slice(0, 5);
+  if (comments.length > 5) {
+    comments.slice(0, 5);
     counter.classList.remove('hidden');
     loading.classList.remove('hidden');
 
@@ -60,12 +55,13 @@ const openFullPhoto = function(url, likes, comments, description) {
 
       for (let i = 0; i < countID; i++) {
         countID += 5;
-        commentsList.slice(5, 10);
-        commentsList.forEach.style.display = "block";
+        comments.slice(5, 10);
+        comments.forEach.style.display = "block";
       }
     });
 
   }
+
   //Не забудьте реализовать обновление числа показанных комментариев в блоке .social__comment-count
   //Если все комментарии показаны, кнопку .comments-loader следует скрыть, добавив класс hidden
   //загрузка комментариев по 5 штук
