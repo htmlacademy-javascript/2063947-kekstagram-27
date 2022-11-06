@@ -24,6 +24,10 @@ const onFullPhotoEscKeydown = (evt) => {
     closeFullPfoto();
   }};
 
+const counter = document.querySelector('.social__comment-count');
+const totalCounter = document.querySelector('.comments-count');
+const loading = document.querySelector('.comments-loader');
+const INITIAL_COMMENTS_AMOUNT = 5;
 let countID = 5;
 
 //открытие полноэкранного изображения
@@ -34,37 +38,37 @@ const openFullPhoto = function(url, likes, comments, description) {
   fullPhotoContainer.querySelector('.comments-count').textContent = comments.length;
   fullPhotoContainer.querySelector('.social__caption').textContent = description;
   commentsList.innerHTML = '';
-  comments.forEach(({avatar, message, commentsName}) => createFullPhotoComments(avatar, message, commentsName));
 
-  const counter = document.querySelector('.social__comment-count');
-  const loading = document.querySelector('.comments-loader');
-  counter.classList.add('hidden');
-  loading.classList.add('hidden');
-  document.body.classList.add('modal-open');
-  document.addEventListener('keydown', onFullPhotoEscKeydown);
-
-  //загрузка комментариев по 5 штук
-
-  if (comments.length > 5) {
-    comments.slice(0, 5);
-    counter.classList.remove('hidden');
-    loading.classList.remove('hidden');
+  if (comments.length <= INITIAL_COMMENTS_AMOUNT) {
+    comments.forEach(({avatar, message, commentsName}) =>
+      createFullPhotoComments(avatar, message, commentsName));
+    loading.classList.add('hidden');
+    counter.classList.add('hidden');
+  } else {
+    comments.slice(0, INITIAL_COMMENTS_AMOUNT).forEach(({avatar, message, commentsName}) =>
+      createFullPhotoComments(avatar, message, commentsName));
 
     loading.addEventListener('click', (evt) => {
       evt.preventDefault();
 
-      for (let i = 0; i < countID; i++) {
-        countID += 5;
-        comments.slice(5, 10);
-        comments.forEach.style.display = "block";
+      comments.slice(countID, countID + INITIAL_COMMENTS_AMOUNT).forEach(({avatar, message, commentsName}) =>
+        createFullPhotoComments(avatar, message, commentsName));
+
+      countID = countID + INITIAL_COMMENTS_AMOUNT;
+      counter.textContent = countID > comments.length ? comments.length : countID;
+
+      if (countID >= comments.length) {
+        loading.classList.add('hidden');
+        counter.classList.add('hidden'); //убираю текст о количестве комментариев после открытия всего количества
       }
     });
-
   }
 
+  totalCounter.textContent = comments.length;
+  document.body.classList.add('modal-open');
+  document.addEventListener('keydown', onFullPhotoEscKeydown);
+
   //Не забудьте реализовать обновление числа показанных комментариев в блоке .social__comment-count
-  //Если все комментарии показаны, кнопку .comments-loader следует скрыть, добавив класс hidden
-  //загрузка комментариев по 5 штук
 };
 
 //закрытие окна при нажатии на Esc
