@@ -24,11 +24,12 @@ const onFullPhotoEscKeydown = (evt) => {
     closeFullPfoto();
   }};
 
-const counter = document.querySelector('.social__comment-count');
+//const counter = document.querySelector('.social__comment-count');
 const totalCounter = document.querySelector('.comments-count');
 const loading = document.querySelector('.comments-loader');
 const INITIAL_COMMENTS_AMOUNT = 5;
 let countID = 5;
+const currentCounter = document.querySelector('.comments-current');
 
 //открытие полноэкранного изображения
 const openFullPhoto = function(url, likes, comments, description) {
@@ -43,7 +44,7 @@ const openFullPhoto = function(url, likes, comments, description) {
     comments.forEach(({avatar, message, commentsName}) =>
       createFullPhotoComments(avatar, message, commentsName));
     loading.classList.add('hidden');
-    counter.classList.add('hidden');
+    currentCounter.textContent = comments.length;
   } else {
     comments.slice(0, INITIAL_COMMENTS_AMOUNT).forEach(({avatar, message, commentsName}) =>
       createFullPhotoComments(avatar, message, commentsName));
@@ -55,11 +56,10 @@ const openFullPhoto = function(url, likes, comments, description) {
         createFullPhotoComments(avatar, message, commentsName));
 
       countID = countID + INITIAL_COMMENTS_AMOUNT;
-      counter.textContent = countID > comments.length ? comments.length : countID;
+      currentCounter.textContent = countID > comments.length ? comments.length : countID;
 
       if (countID >= comments.length) {
         loading.classList.add('hidden');
-        counter.classList.add('hidden'); //убираю текст о количестве комментариев после открытия всего количества
       }
     });
   }
@@ -67,8 +67,6 @@ const openFullPhoto = function(url, likes, comments, description) {
   totalCounter.textContent = comments.length;
   document.body.classList.add('modal-open');
   document.addEventListener('keydown', onFullPhotoEscKeydown);
-
-  //Не забудьте реализовать обновление числа показанных комментариев в блоке .social__comment-count
 };
 
 //закрытие окна при нажатии на Esc
