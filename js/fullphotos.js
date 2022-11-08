@@ -24,6 +24,13 @@ const onFullPhotoEscKeydown = (evt) => {
     closeFullPfoto();
   }};
 
+//const counter = document.querySelector('.social__comment-count');
+const totalCounter = document.querySelector('.comments-count');
+const loading = document.querySelector('.comments-loader');
+const INITIAL_COMMENTS_AMOUNT = 5;
+let countID = 5;
+const currentCounter = document.querySelector('.comments-current');
+
 //открытие полноэкранного изображения
 const openFullPhoto = function(url, likes, comments, description) {
   fullPhotoContainer.classList.remove('hidden');
@@ -32,12 +39,32 @@ const openFullPhoto = function(url, likes, comments, description) {
   fullPhotoContainer.querySelector('.comments-count').textContent = comments.length;
   fullPhotoContainer.querySelector('.social__caption').textContent = description;
   commentsList.innerHTML = '';
-  comments.forEach(({avatar, message, commentsName}) => createFullPhotoComments(avatar, message, commentsName));
 
-  const counter = document.querySelector('.social__comment-count');
-  const loading = document.querySelector('.comments-loader');
-  counter.classList.add('hidden');
-  loading.classList.add('hidden');
+  if (comments.length <= INITIAL_COMMENTS_AMOUNT) {
+    comments.forEach(({avatar, message, commentsName}) =>
+      createFullPhotoComments(avatar, message, commentsName));
+    loading.classList.add('hidden');
+    currentCounter.textContent = comments.length;
+  } else {
+    comments.slice(0, INITIAL_COMMENTS_AMOUNT).forEach(({avatar, message, commentsName}) =>
+      createFullPhotoComments(avatar, message, commentsName));
+
+    loading.addEventListener('click', (evt) => {
+      evt.preventDefault();
+
+      comments.slice(countID, countID + INITIAL_COMMENTS_AMOUNT).forEach(({avatar, message, commentsName}) =>
+        createFullPhotoComments(avatar, message, commentsName));
+
+      countID = countID + INITIAL_COMMENTS_AMOUNT;
+      currentCounter.textContent = countID > comments.length ? comments.length : countID;
+
+      if (countID >= comments.length) {
+        loading.classList.add('hidden');
+      }
+    });
+  }
+
+  totalCounter.textContent = comments.length;
   document.body.classList.add('modal-open');
   document.addEventListener('keydown', onFullPhotoEscKeydown);
 };
