@@ -16,13 +16,19 @@ const getRandomArrayElement = (array) =>
 //Функция для обработчика по нажатию Esc
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
-/*//Функция для проверки максимальной длины строки
-function checkLengthShort(str, maxLegth) {
-  return str.length <= maxLegth;
+//Функция для удаления последнего символа в строке
+function removeLastCharacter (string) {
+  return string ? string.slice(0, -1) : string;
 }
-checkLengthShort();
-*/
+
+//Функция для приведения строки к числу
+function toNumber (string) {
+  return Number(string);
+}
+
 
 export {getRandomArrayElement};
 export {getRandomPositiveInteger};
 export {isEscapeKey};
+export {removeLastCharacter};
+export {toNumber};
