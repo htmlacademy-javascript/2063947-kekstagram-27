@@ -40,6 +40,7 @@ const sliderElement = document.querySelector('.effect-level__slider');
 const valueElement = document.querySelector('.effect-level__value');
 const fieldsetElement = document.querySelector('.img-upload__effects');
 imagePreview.classList.add('effects__preview--none'); //эффект Оригинал по умолчанию
+valueElement.value = 100; //сброс уровня насыщенности
 
 noUiSlider.create(sliderElement, {
   range: {
@@ -64,17 +65,15 @@ noUiSlider.create(sliderElement, {
 
 sliderElement.noUiSlider.on('update', () => {
   valueElement.value = sliderElement.noUiSlider.get();
+  console.log(valueElement.value);
 });
-
-console.log(valueElement.value);
 
 fieldsetElement.addEventListener('change', (evt) => {
   if (evt.target.value === 'none') {
     imagePreview.style.removeProperty('filter');
     sliderElement.noUiSlider.destroy();
   } else if (evt.target.value === 'chrome') {
-    //imagePreview.classList.add('effects__preview--chrome');
-    imagePreview.className = `effects__preview  effects__preview--${evt.target.value}`;
+    imagePreview.className = `effects__preview--${evt.target.value}`;
     sliderElement.noUiSlider.updateOptions({
       range: {
         min: 0,
@@ -83,10 +82,9 @@ fieldsetElement.addEventListener('change', (evt) => {
       start: 0.5,
       step: 0.1,
     });
-    console.log(valueElement.value);
+    imagePreview.style.filter = `grayscale(${valueElement.value})`; //хром
   } else if (evt.target.value === 'sepia') {
-    //imagePreview.classList.add('effects__preview--sepia');
-    imagePreview.className = `effects__preview  effects__preview--${evt.target.value}`;
+    imagePreview.className = `effects__preview--${evt.target.value}`;
     sliderElement.noUiSlider.updateOptions({
       range: {
         min: 0,
@@ -95,10 +93,9 @@ fieldsetElement.addEventListener('change', (evt) => {
       start: 0.5,
       step: 0.1,
     });
-    console.log(valueElement.value);
+    imagePreview.style.filter = `sepia(${valueElement.value})`; //сепия
   } else if (evt.target.value === 'marvin') {
-    //imagePreview.classList.add('effects__preview--marvin');
-    imagePreview.className = `effects__preview  effects__preview--${evt.target.value}`;
+    imagePreview.className = `effects__preview--${evt.target.value}`;
     sliderElement.noUiSlider.updateOptions({
       range: {
         min: 0,
@@ -107,10 +104,9 @@ fieldsetElement.addEventListener('change', (evt) => {
       start: 50,
       step: 1,
     });
-    console.log(valueElement.value);
+    imagePreview.style.filter = `invert(${valueElement.value})%`; //марвин в %
   } else if (evt.target.value === 'phobos') {
-    //imagePreview.classList.add('effects__preview--phobos');
-    imagePreview.className = `effects__preview  effects__preview--${evt.target.value}`;
+    imagePreview.className = `effects__preview--${evt.target.value}`;
     sliderElement.noUiSlider.updateOptions({
       range: {
         min: 0,
@@ -119,10 +115,9 @@ fieldsetElement.addEventListener('change', (evt) => {
       start: 1.5,
       step: 0.1,
     });
-    console.log(valueElement.value);
+    imagePreview.style.filter = `blur(${valueElement.value}px)`; //фобос в px
   } else if (evt.target.value === 'heat') {
-    //imagePreview.classList.add('effects__preview--heat');
-    imagePreview.className = `effects__preview  effects__preview--${evt.target.value}`;
+    imagePreview.className = `effects__preview--${evt.target.value}`;
     sliderElement.noUiSlider.updateOptions({
       range: {
         min: 1,
@@ -131,6 +126,6 @@ fieldsetElement.addEventListener('change', (evt) => {
       start: 2,
       step: 0.1,
     });
-    console.log(valueElement.value);
+    imagePreview.style.filter = `brightness(${valueElement.value})`; //зной
   }
 });
