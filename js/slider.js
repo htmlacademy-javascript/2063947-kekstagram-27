@@ -63,16 +63,12 @@ noUiSlider.create(sliderElement, {
   },
 });
 
-sliderElement.noUiSlider.on('update', () => {
-  valueElement.value = sliderElement.noUiSlider.get();
-  console.log(valueElement.value);
-});
-
 fieldsetElement.addEventListener('change', (evt) => {
   if (evt.target.value === 'none') {
-    imagePreview.style.removeProperty('filter');
-    sliderElement.noUiSlider.destroy();
+    imagePreview.style.filter = '';
+    sliderElement.classList.add('hidden');
   } else if (evt.target.value === 'chrome') {
+    sliderElement.classList.remove('hidden');
     imagePreview.className = `effects__preview--${evt.target.value}`;
     sliderElement.noUiSlider.updateOptions({
       range: {
@@ -82,8 +78,12 @@ fieldsetElement.addEventListener('change', (evt) => {
       start: 0.5,
       step: 0.1,
     });
-    imagePreview.style.filter = `grayscale(${valueElement.value})`; //хром
+    sliderElement.noUiSlider.on('update', () => {
+      valueElement.value = sliderElement.noUiSlider.get();
+      imagePreview.style.filter = `grayscale(${valueElement.value})`; //хром
+    });
   } else if (evt.target.value === 'sepia') {
+    sliderElement.classList.remove('hidden');
     imagePreview.className = `effects__preview--${evt.target.value}`;
     sliderElement.noUiSlider.updateOptions({
       range: {
@@ -93,19 +93,27 @@ fieldsetElement.addEventListener('change', (evt) => {
       start: 0.5,
       step: 0.1,
     });
-    imagePreview.style.filter = `sepia(${valueElement.value})`; //сепия
+    sliderElement.noUiSlider.on('update', () => {
+      valueElement.value = sliderElement.noUiSlider.get();
+      imagePreview.style.filter = `sepia(${valueElement.value})`; //сепия
+    });
   } else if (evt.target.value === 'marvin') {
+    sliderElement.classList.remove('hidden');
     imagePreview.className = `effects__preview--${evt.target.value}`;
     sliderElement.noUiSlider.updateOptions({
       range: {
         min: 0,
         max: 100,
       },
-      start: 50,
+      start: 100,
       step: 1,
     });
-    imagePreview.style.filter = `invert(${valueElement.value})%`; //марвин в %
+    sliderElement.noUiSlider.on('update', () => {
+      valueElement.value = sliderElement.noUiSlider.get();
+      imagePreview.style.filter = `invert(${valueElement.value}%)`; //марвин
+    });
   } else if (evt.target.value === 'phobos') {
+    sliderElement.classList.remove('hidden');
     imagePreview.className = `effects__preview--${evt.target.value}`;
     sliderElement.noUiSlider.updateOptions({
       range: {
@@ -115,8 +123,12 @@ fieldsetElement.addEventListener('change', (evt) => {
       start: 1.5,
       step: 0.1,
     });
-    imagePreview.style.filter = `blur(${valueElement.value}px)`; //фобос в px
+    sliderElement.noUiSlider.on('update', () => {
+      valueElement.value = sliderElement.noUiSlider.get();
+      imagePreview.style.filter = `blur(${valueElement.value}px)`; //фобос в px
+    });
   } else if (evt.target.value === 'heat') {
+    sliderElement.classList.remove('hidden');
     imagePreview.className = `effects__preview--${evt.target.value}`;
     sliderElement.noUiSlider.updateOptions({
       range: {
@@ -126,6 +138,9 @@ fieldsetElement.addEventListener('change', (evt) => {
       start: 2,
       step: 0.1,
     });
-    imagePreview.style.filter = `brightness(${valueElement.value})`; //зной
+    sliderElement.noUiSlider.on('update', () => {
+      valueElement.value = sliderElement.noUiSlider.get();
+      imagePreview.style.filter = `brightness(${valueElement.value})`; //зной
+    });
   }
 });
