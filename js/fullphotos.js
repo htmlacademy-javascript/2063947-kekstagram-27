@@ -4,7 +4,7 @@ const fullPhotoContainer = document.querySelector('.big-picture');
 const commentsList = document.querySelector('.social__comments');
 
 const fullPhoto = document.querySelector('.big-picture__preview');
-const closeFullPfotoButton = fullPhoto.querySelector('.big-picture__cancel');
+const closeFullPhotoButton = fullPhoto.querySelector('.big-picture__cancel');
 
 const newCommentTemplate = document.querySelector('#picture_comment')
   .content
@@ -21,10 +21,9 @@ const createFullPhotoComments = function(avatar, message, commentsName) {
 
 const onFullPhotoEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
-    closeFullPfoto();
+    closeFullPhoto();
   }};
 
-//const counter = document.querySelector('.social__comment-count');
 const totalCounter = document.querySelector('.comments-count');
 const loading = document.querySelector('.comments-loader');
 const INITIAL_COMMENTS_AMOUNT = 5;
@@ -70,13 +69,13 @@ const openFullPhoto = function(url, likes, comments, description) {
 };
 
 //закрытие окна при нажатии на Esc
-function closeFullPfoto () {
+function closeFullPhoto () {
   fullPhotoContainer.classList.add('hidden');
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onFullPhotoEscKeydown);
 }
 
 //закрытие окна при нажатии на крестик
-closeFullPfotoButton.addEventListener('click', closeFullPfoto);
+closeFullPhotoButton.addEventListener('click', closeFullPhoto);
 
-export {openFullPhoto};
+export {openFullPhoto, closeFullPhoto};

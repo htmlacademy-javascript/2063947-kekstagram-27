@@ -99,13 +99,25 @@ const checkCommentsLength = (comment) => comment.length <= 140;
 pristine.addValidator(commentsInput, checkCommentsLength, 'Длина комментария не больше 140 символов');
 
 //валидация
-loadingForm.addEventListener('submit', (evt) => {
-  evt.preventDefault();
 
-  const isValid = pristine.validate();
-  if (isValid) {
-    console.log('Можно отправлять');
-  } else {
-    console.log('Форма невалидна');
-  }
-});
+const setUserFormSubmit = (onSuccess) => {
+  loadingForm.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+
+    const isValid = pristine.validate();
+    if (isValid) {
+      const formData = new FormData(evt.target);
+
+      fetch(
+        'https://27.javascript.pages.academy/kekstagram/data',
+        {
+          method: 'POST',
+          body: formData,
+        },
+      ).then(() => onSuccess());
+    }
+    // else {console.log('Форма невалидна');}
+  });
+};
+
+export {setUserFormSubmit};

@@ -18,13 +18,11 @@ const description = 'Фотография для Кекстаграм. Собс�
 const COMMENTS_NAME = ['Alex', 'Barbara', 'Mike', 'Dilan', 'Lisa']; //строка, имена случайные
 
 //Функция для создания сообщений (необходимо взять 1 или 2 случайных сообщения)
-
 const createMessages = () =>
   Array.from({length: getRandomPositiveInteger(1, 2)}, () =>
     getRandomArrayElement(message)).join('.');
 
 //Функция для создания комментария
-
 const createComments = (commentsIndex) => ({
   id: commentsIndex + 1,
   avatar: `img/avatar-${getRandomPositiveInteger(0, AVATARS_COUNT)}.svg`,
@@ -50,6 +48,3 @@ const createPhotoDescriptions = (count) =>
     createDescription(index));
 
 export {createPhotoDescriptions};
-
-/*const photoTemplate = document.querySelector('#picture').content;
-const newphotoTemplate = photoTemplate.querySelector('.picture');*/

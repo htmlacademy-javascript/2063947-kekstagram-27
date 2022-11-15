@@ -1,4 +1,4 @@
-import {createPhotoDescriptions} from './data.js';
+// import {createPhotoDescriptions} from './data.js'; //DELETE
 import {openFullPhoto} from './fullphotos.js';
 
 //находим шаблон
@@ -6,12 +6,13 @@ const newphotoTemplate = document.querySelector('#picture')
   .content
   .querySelector('.picture');
 
-const similarPhotos = createPhotoDescriptions(25);
+// const similarPhotos = createPhotoDescriptions(25); //DELETE
 
 //складываем все в фрагмент
 const similarPhotosFragment = document.createDocumentFragment();
 
-const createUserPhotos = () => {
+//нужно эту функцию заменить на загрузку данных с с
+const createUserPhotos = (similarPhotos) => {
 
   similarPhotos.forEach(({url, likes, description, comments}) => {
     const photoElement = newphotoTemplate.cloneNode(true); //клонируем шаблон
