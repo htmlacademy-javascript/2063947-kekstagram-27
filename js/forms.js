@@ -1,4 +1,6 @@
 import {isEscapeKey} from './util.js';
+import {showAlert} from './util.js';
+import {sendData} from './api.js';
 
 //находим форму загрузки и редактирования изображения
 const photoLoadingButton = document.querySelector('.img-upload__input');
@@ -98,7 +100,19 @@ const checkCommentsLength = (comment) => comment.length <= 140;
 
 pristine.addValidator(commentsInput, checkCommentsLength, 'Длина комментария не больше 140 символов');
 
-//валидация
+//отправка формы
+
+const submitButton = photoLoadingForm.querySelector('.img-upload__submit');
+
+const blockSubmitButton = () => {
+  submitButton.disabled = true;
+  submitButton.textContent = 'Публикую...';
+};
+
+const unblockSubmitButton = () => {
+  submitButton.disabled = false;
+  submitButton.textContent = 'Опубликовать';
+};
 
 const setUserFormSubmit = (onSuccess) => {
   loadingForm.addEventListener('submit', (evt) => {
@@ -106,18 +120,23 @@ const setUserFormSubmit = (onSuccess) => {
 
     const isValid = pristine.validate();
     if (isValid) {
-      const formData = new FormData(evt.target);
-
-      fetch(
-        'https://27.javascript.pages.academy/kekstagram/data',
-        {
-          method: 'POST',
-          body: formData,
+      blockSubmitButton();
+      sendData(
+        () => {
+          onSuccess();
+          unblockSubmitButton();
         },
-      ).then(() => onSuccess());
+        () => {
+          showAlert('Не удалось отправить форму. Попробуйте ещё раз');
+          unblockSubmitButton();
+        },
+        new FormData(evt.target),
+      );
     }
-    // else {console.log('Форма невалидна');}
   });
 };
 
-export {setUserFormSubmit};
+//закрытие формы при нажатии Опубликовать
+setUserFormSubmit(closeLoadForm);
+
+export {setUserFormSubmit, closeLoadForm};

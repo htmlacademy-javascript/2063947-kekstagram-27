@@ -1,16 +1,13 @@
 import './forms.js';
 import './slider.js';
 
+//получение данных с сервера
 import {createUserPhotos} from './newphotos.js';
-createUserPhotos();
+import {getData} from './api.js';
+import {showAlert} from './util.js';
 
-fetch('https://27.javascript.pages.academy/kekstagram/data')
-  .then((response) => response.json())
-  .then((photos) => {
-    createUserPhotos(photos.slice(0, 25));
-  });
+const onGetDataSuccess = (photos) => {
+  createUserPhotos(photos.slice(0, 25));
+};
 
-import {setUserFormSubmit} from './forms.js';
-import {closeFullPhoto} from './fullphotos.js';
-
-setUserFormSubmit(closeFullPhoto);
+getData(onGetDataSuccess, showAlert);

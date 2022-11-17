@@ -78,4 +78,4 @@ function closeFullPhoto () {
 //закрытие окна при нажатии на крестик
 closeFullPhotoButton.addEventListener('click', closeFullPhoto);
 
-export {openFullPhoto, closeFullPhoto};
+export {openFullPhoto};
