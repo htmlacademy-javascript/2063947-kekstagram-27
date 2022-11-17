@@ -1,12 +1,9 @@
-// import {createPhotoDescriptions} from './data.js'; //DELETE
 import {openFullPhoto} from './fullphotos.js';
 
 //находим шаблон
 const newphotoTemplate = document.querySelector('#picture')
   .content
   .querySelector('.picture');
-
-// const similarPhotos = createPhotoDescriptions(25); //DELETE
 
 //складываем все в фрагмент
 const similarPhotosFragment = document.createDocumentFragment();

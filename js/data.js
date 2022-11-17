@@ -1,7 +1,6 @@
 import {getRandomArrayElement} from './util.js';
 import {getRandomPositiveInteger} from './util.js';
 
-/*const PICTURES_COUNT = 25; //необходимо создать 25 описаний фотографий*/
 const AVATARS_COUNT = 6; //всего есть 6 вариантов аватарок
 const COMMENTS_COUNT = 10; //количество комментариев определяется самостоятельно
 

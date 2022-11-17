@@ -10,4 +10,4 @@ const onGetDataSuccess = (photos) => {
   createUserPhotos(photos.slice(0, 25));
 };
 
-getData(onGetDataSuccess, showAlert);
+getData(onGetDataSuccess, () => showAlert('Не удалось загрузить фотографии'));

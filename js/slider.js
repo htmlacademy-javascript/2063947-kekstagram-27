@@ -144,3 +144,13 @@ fieldsetElement.addEventListener('change', (evt) => {
     });
   }
 });
+
+const resetImage = () => {
+  sliderElement.noUiSlider.set(valueElement.value); //сброс насыщенности эффекта //resetImage
+  imagePreview.style.transform = '';
+  imagePreview.style.filter = ''; //возврат к эффекту Оригинал
+  imagePreview.className = 'effects__preview--none';
+  sliderElement.classList.add('hidden'); //скрываем ползунок
+};
+
+export {resetImage};
