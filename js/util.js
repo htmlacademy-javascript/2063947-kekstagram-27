@@ -1,3 +1,5 @@
+const ALERT_SHOW_TIME = 5000;
+
 //Функция, возвращающая случайное целое число из переданного диапазона включительно
 function getRandomPositiveInteger (a, b) {
   if (a < 0 || b < 0) {
@@ -26,9 +28,29 @@ function toNumber (string) {
   return Number(string);
 }
 
+const showAlert = (message) => {
+  const alertContainer = document.createElement('div');
+  alertContainer.style.zIndex = '100';
+  alertContainer.style.position = 'absolute';
+  alertContainer.style.left = '0';
+  alertContainer.style.top = '0';
+  alertContainer.style.right = '0';
+  alertContainer.style.padding = '10px 3px';
+  alertContainer.style.fontSize = '25px';
+  alertContainer.style.textAlign = 'center';
+  alertContainer.style.backgroundColor = 'black';
+  alertContainer.style.color = 'red';
+  alertContainer.textContent = message;
+  document.body.append(alertContainer);
+
+  setTimeout(() => {
+    alertContainer.remove();
+  }, ALERT_SHOW_TIME);
+};
 
 export {getRandomArrayElement};
 export {getRandomPositiveInteger};
 export {isEscapeKey};
 export {removeLastCharacter};
 export {toNumber};
+export {showAlert};

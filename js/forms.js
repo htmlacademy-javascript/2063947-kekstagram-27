@@ -1,4 +1,7 @@
 import {isEscapeKey} from './util.js';
+import {sendData} from './api.js';
+import {showSuccessMessage, showErrorMessage} from './message.js';
+import {resetImage} from './slider.js';
 
 //находим форму загрузки и редактирования изображения
 const photoLoadingButton = document.querySelector('.img-upload__input');
@@ -23,7 +26,6 @@ const onLoadFormEscKeydown = (evt) => {
 
 //открытие формы загрузки изображения
 const openLoadForm = () => {
-  //evt.preventDefault();
   photoLoadingForm.classList.remove('hidden');
   document.body.classList.add('modal-open');
   document.addEventListener('keydown', onLoadFormEscKeydown);
@@ -98,14 +100,56 @@ const checkCommentsLength = (comment) => comment.length <= 140;
 
 pristine.addValidator(commentsInput, checkCommentsLength, 'Длина комментария не больше 140 символов');
 
-//валидация
-loadingForm.addEventListener('submit', (evt) => {
-  evt.preventDefault();
+//отправка формы
 
-  const isValid = pristine.validate();
-  if (isValid) {
-    console.log('Можно отправлять');
-  } else {
-    console.log('Форма невалидна');
-  }
-});
+const submitButton = photoLoadingForm.querySelector('.img-upload__submit');
+//const sliderElement = document.querySelector('.effect-level__slider');
+const valueElement = document.querySelector('.effect-level__value');
+const scaleInput = document.querySelector('input[name="scale"]');
+//const imagePreview = document.querySelector('.img-upload__preview img');
+
+const blockSubmitButton = () => {
+  submitButton.disabled = true;
+  submitButton.textContent = 'Публикую...';
+};
+
+const unblockSubmitButton = () => {
+  submitButton.disabled = false;
+  submitButton.textContent = 'Опубликовать';
+};
+
+const resetForm = () => {
+  loadingForm.reset(); //сброс полей формы
+  valueElement.value = 50; //сброс уровня насыщенности
+  scaleInput.value = '100%'; //возврат к масштабу 100%
+  resetImage();
+};
+
+const setUserFormSubmit = (onSuccess) => {
+  loadingForm.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+
+    const isValid = pristine.validate();
+    if (isValid) {
+      blockSubmitButton();
+      sendData(
+        () => {
+          onSuccess();
+          unblockSubmitButton();
+          showSuccessMessage();
+          resetForm();
+        },
+        () => {
+          showErrorMessage();
+          unblockSubmitButton();
+        },
+        new FormData(evt.target),
+      );
+    }
+  });
+};
+
+//закрытие формы при нажатии Опубликовать
+setUserFormSubmit(closeLoadForm);
+
+export {setUserFormSubmit, closeLoadForm};

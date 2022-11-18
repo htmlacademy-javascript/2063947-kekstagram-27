@@ -40,6 +40,7 @@ const sliderElement = document.querySelector('.effect-level__slider');
 const valueElement = document.querySelector('.effect-level__value');
 const fieldsetElement = document.querySelector('.img-upload__effects');
 imagePreview.classList.add('effects__preview--none'); //эффект Оригинал по умолчанию
+sliderElement.classList.add('hidden');
 valueElement.value = 100; //сброс уровня насыщенности
 
 noUiSlider.create(sliderElement, {
@@ -144,3 +145,13 @@ fieldsetElement.addEventListener('change', (evt) => {
     });
   }
 });
+
+const resetImage = () => {
+  sliderElement.noUiSlider.set(valueElement.value); //сброс насыщенности эффекта //resetImage
+  imagePreview.style.transform = '';
+  imagePreview.style.filter = ''; //возврат к эффекту Оригинал
+  imagePreview.className = 'effects__preview--none';
+  sliderElement.classList.add('hidden'); //скрываем ползунок
+};
+
+export {resetImage};
