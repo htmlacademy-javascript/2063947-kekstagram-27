@@ -123,11 +123,6 @@ const resetForm = () => {
   valueElement.value = 50; //сброс уровня насыщенности
   scaleInput.value = '100%'; //возврат к масштабу 100%
   resetImage();
-  // sliderElement.noUiSlider.set(valueElement.value); //сброс насыщенности эффекта //resetImage
-  // imagePreview.style.transform = '';
-  // imagePreview.style.filter = ''; //возврат к эффекту Оригинал
-  // imagePreview.className = 'effects__preview--none';
-  // sliderElement.classList.add('hidden'); //скрываем ползунок
 };
 
 const setUserFormSubmit = (onSuccess) => {
