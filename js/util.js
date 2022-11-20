@@ -48,9 +48,38 @@ const showAlert = (message) => {
   }, ALERT_SHOW_TIME);
 };
 
+const debounce = (callback, timeoutDelay) => {
+  let timeoutId;
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+};
+
+// Функция throttle для пропуска кадров
+function throttle (callback, delayBetweenFrames) {
+  // Используем замыкания, чтобы время "последнего кадра" навсегда приклеилось
+  // к возвращаемой функции с условием, тогда мы его сможем перезаписывать
+  let lastTime = 0;
+
+  return (...rest) => {
+    // Получаем текущую дату в миллисекундах, чтобы можно было в дальнейшем вычислять разницу между кадрами
+    const now = new Date();
+
+    // Если время между кадрами больше задержки, вызываем наш колбэк и перезаписываем lastTime временем "последнего кадра"
+    if (now - lastTime >= delayBetweenFrames) {
+      callback.apply(this, rest);
+      lastTime = now;
+    }
+  };
+}
+
+throttle();
+
 export {getRandomArrayElement};
 export {getRandomPositiveInteger};
 export {isEscapeKey};
 export {removeLastCharacter};
 export {toNumber};
 export {showAlert};
+export {debounce};

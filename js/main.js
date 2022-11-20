@@ -1,5 +1,6 @@
 import './forms.js';
 import './slider.js';
+import './filters.js';
 
 //получение данных с сервера
 import {createUserPhotos} from './newphotos.js';
