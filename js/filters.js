@@ -1,27 +1,29 @@
 import {createUserPhotos} from './newphotos.js';
-import {debounce} from './util.js';
+import { debounce } from './util.js';
 
 const filterBoard = document.querySelector('.img-filters');
 filterBoard.classList.remove('img-filters--inactive');
-const RERENDER_DELAY = 500;
 
 //удаление фото
 const clearCurrentPhotos = () => {
-  const pictures = document.querySelectorAll('.picture__img');
-  pictures.classList.add('hidden');
+  const pictures = document.querySelectorAll('.picture');
+  pictures.forEach((picture) => {
+    picture.remove();
+  });
 };
 
 //ПО УМОЛЧАНИЮ
 const defaultButton = document.querySelector('#filter-default');
-fetch('https://27.javascript.pages.academy/kekstagram/data').then((photos) => {
-  createUserPhotos(photos.slice(0, 25));
-  defaultButton.addEventListener('click', () => {
+const addDefaultButtonListener = (photos) => {
+  defaultButton.addEventListener('click', debounce(() => {
+    const activeButton = document.querySelector('.img-filters__button--active');
+    activeButton.classList.remove('img-filters__button--active');
+    defaultButton.classList.add('img-filters__button--active');
     clearCurrentPhotos();
-    createUserPhotos(photos.slice(0, 25))(debounce(() => createUserPhotos(photos.slice(0, 25)),
-      RERENDER_DELAY,
-    ));
-  });
-});
+    createUserPhotos(photos.slice(0, 25));
+  })
+  );
+};
 
 //СЛУЧАЙНЫЕ
 const shuffleList = (list) => {
@@ -33,15 +35,16 @@ const shuffleList = (list) => {
 };
 
 const randomButton = document.querySelector('#filter-random');
-fetch('https://27.javascript.pages.academy/kekstagram/data').then((photos) => {
-  createUserPhotos(photos.slice(0, 10));
-  randomButton.addEventListener('click', () => {
+const addRandomButtonListener = (photos) => {
+  randomButton.addEventListener('click', debounce(() => {
+    const activeButton = document.querySelector('.img-filters__button--active');
+    activeButton.classList.remove('img-filters__button--active');
+    randomButton.classList.add('img-filters__button--active');
     clearCurrentPhotos();
-    createUserPhotos(shuffleList(photos))(debounce(() => createUserPhotos(photos.slice(0, 25)),
-      RERENDER_DELAY,
-    ));
-  });
-});
+    createUserPhotos(shuffleList(photos.slice(0, 10)));
+  })
+  );
+};
 
 //ОБСУЖДАЕМЫЕ
 const sortByCommentsAmount = (photos) =>
@@ -49,12 +52,15 @@ const sortByCommentsAmount = (photos) =>
     b.comments.length - a.comments.length);
 
 const discussedButton = document.querySelector('#filter-discussed');
-fetch('https://27.javascript.pages.academy/kekstagram/data').then((photos) => {
-  createUserPhotos(photos.slice(0, 25));
-  discussedButton.addEventListener('click', () => {
+const addDiscussedButtonListener = (photos) => {
+  discussedButton.addEventListener('click', debounce(() => {
+    const activeButton = document.querySelector('.img-filters__button--active');
+    activeButton.classList.remove('img-filters__button--active');
+    discussedButton.classList.add('img-filters__button--active');
     clearCurrentPhotos();
-    createUserPhotos(sortByCommentsAmount(photos))(debounce(() => createUserPhotos(photos.slice(0, 25)),
-      RERENDER_DELAY,
-    ));
-  });
-});
+    createUserPhotos(sortByCommentsAmount(photos));
+  })
+  );
+};
+
+export {addDefaultButtonListener, addRandomButtonListener, addDiscussedButtonListener};
