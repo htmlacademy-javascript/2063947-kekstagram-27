@@ -1,5 +1,7 @@
 import './forms.js';
 import './slider.js';
+import './filters.js';
+import {addDefaultButtonListener, addRandomButtonListener, addDiscussedButtonListener} from './filters.js';
 
 import {addDefaultButtonListener, addRandomButtonListener, addDiscussedButtonListener} from './filters.js';
 import {createUserPhotos} from './new-photos.js';
