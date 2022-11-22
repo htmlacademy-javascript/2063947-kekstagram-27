@@ -1,4 +1,5 @@
 const ALERT_SHOW_TIME = 5000;
+const RERENDER_DELAY = 500;
 
 //Функция, возвращающая случайное целое число из переданного диапазона включительно
 function getRandomPositiveInteger (a, b) {
@@ -47,8 +48,6 @@ const showAlert = (message) => {
     alertContainer.remove();
   }, ALERT_SHOW_TIME);
 };
-
-const RERENDER_DELAY = 500;
 
 const debounce = (callback, timeoutDelay = RERENDER_DELAY) => {
   let timeoutId;

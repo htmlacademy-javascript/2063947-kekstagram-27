@@ -1,4 +1,4 @@
-import {openFullPhoto} from './fullphotos.js';
+import {openFullPhoto} from './full-photos.js';
 
 //находим шаблон
 const newphotoTemplate = document.querySelector('#picture')
@@ -8,7 +8,7 @@ const newphotoTemplate = document.querySelector('#picture')
 //складываем все в фрагмент
 const similarPhotosFragment = document.createDocumentFragment();
 
-//нужно эту функцию заменить на загрузку данных с с
+//отрисовка фото
 const createUserPhotos = (similarPhotos) => {
 
   similarPhotos.forEach(({url, likes, description, comments}) => {

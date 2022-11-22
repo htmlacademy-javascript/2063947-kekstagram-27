@@ -1,4 +1,4 @@
-import {createUserPhotos} from './newphotos.js';
+import {createUserPhotos} from './new-photos.js';
 import { debounce } from './util.js';
 
 const filterBoard = document.querySelector('.img-filters');
