@@ -1,3 +1,5 @@
+const textAlert = 'Не удалось загрузить фотографии';
+
 import './forms.js';
 import './slider.js';
 
@@ -13,4 +15,4 @@ const onGetDataSuccess = (photos) => {
   addDiscussedButtonListener(photos);
 };
 
-getData(onGetDataSuccess, () => showAlert('Не удалось загрузить фотографии'));
+getData(onGetDataSuccess, () => showAlert(textAlert));

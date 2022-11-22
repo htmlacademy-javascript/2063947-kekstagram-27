@@ -1,5 +1,8 @@
 import {isEscapeKey} from './util.js';
 
+const INITIAL_COMMENTS_AMOUNT = 5;
+let countID = 5;
+
 const fullPhotoContainer = document.querySelector('.big-picture');
 const commentsList = document.querySelector('.social__comments');
 
@@ -26,8 +29,6 @@ const onFullPhotoEscKeydown = (evt) => {
 
 const totalCounter = document.querySelector('.comments-count');
 const loading = document.querySelector('.comments-loader');
-const INITIAL_COMMENTS_AMOUNT = 5;
-let countID = 5;
 const currentCounter = document.querySelector('.comments-current');
 
 //открытие полноэкранного изображения
