@@ -1,10 +1,8 @@
 import './forms.js';
 import './slider.js';
-import './filters.js';
-import {addDefaultButtonListener, addRandomButtonListener, addDiscussedButtonListener} from './filters.js';
 
-//получение данных с сервера
-import {createUserPhotos} from './newphotos.js';
+import {addDefaultButtonListener, addRandomButtonListener, addDiscussedButtonListener} from './filters.js';
+import {createUserPhotos} from './new-photos.js';
 import {getData} from './api.js';
 import {showAlert} from './util.js';
 

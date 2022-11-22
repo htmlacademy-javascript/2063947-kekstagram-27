@@ -103,10 +103,8 @@ pristine.addValidator(commentsInput, checkCommentsLength, 'Длина комме
 //отправка формы
 
 const submitButton = photoLoadingForm.querySelector('.img-upload__submit');
-//const sliderElement = document.querySelector('.effect-level__slider');
 const valueElement = document.querySelector('.effect-level__value');
 const scaleInput = document.querySelector('input[name="scale"]');
-//const imagePreview = document.querySelector('.img-upload__preview img');
 
 const blockSubmitButton = () => {
   submitButton.disabled = true;
