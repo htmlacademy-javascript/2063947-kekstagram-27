@@ -70,11 +70,11 @@ const openFullPhoto = function(url, likes, comments, description) {
 };
 
 //закрытие окна при нажатии на Esc
-function closeFullPhoto () {
+const closeFullPhoto = () => {
   fullPhotoContainer.classList.add('hidden');
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onFullPhotoEscKeydown);
-}
+};
 
 //закрытие окна при нажатии на крестик
 closeFullPhotoButton.addEventListener('click', closeFullPhoto);
